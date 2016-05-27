@@ -102,7 +102,7 @@ function setBounds(x, y, width, height) {
     )
 }
 
-document.addEventListener('click', onClick)
+// document.addEventListener('click', onClick)
 
 /*
  * ---------------------------------------------------------------
@@ -112,7 +112,6 @@ var bounds ={
             min: {x: undefined, y: undefined},
             max: {x: undefined, y: undefined}
             }
-console.log(bounds);
 
 /**
  * This method will be called every time the user clicks on the page
@@ -120,6 +119,7 @@ console.log(bounds);
  * @param  {object}  event  The event object.
  *                          Check the MDN reference for field documentation.
  */
+
 function onClick(event) {
 
     points.push({ x: event.clientX, y: event.clientY});
@@ -140,10 +140,73 @@ function onClick(event) {
         }
         var width = bounds.max.x - bounds.min.x;
         var height = bounds.max.y - bounds.min.y;
-        console.log(bounds);
+        // console.log(bounds);
+        setBounds(bounds.min.x, bounds.min.y, width, height);
     }
 
+    // addPoint(event.clientX, event.clientY, Math.round(timeMouse / 10));
     addPoint(event.clientX, event.clientY);
-    setBounds(bounds.min.x, bounds.min.y, width, height);
+}
+
+/*
+    feldat: objectumok9.0.1
+    fájlnév: object9.js
+    cél hogy nőjön a pont radiusa a kattintás hosszával
+
+var timeMouse;
+
+document.addEventListener('mousedown', mouseDown);
+var downMouse;
+function mouseDown(event) {
+    downMouse = Date.now();
+}
+
+document.addEventListener('mouseup', mouseUp);
+var upMouse;
+function mouseUp(event) {
+    upMouse = Date.now();
+    timeMouse = upMouse - downMouse;
+}
+
+*/
+
+
+document.addEventListener('mousedown', mouseDown);
+var isMouseDown = false;
+
+function mouseDown(event) {
+    isMouseDown = true;
+    addPoint(event.clientX, event.clientY);
+    points.push({ x: event.clientX, y: event.clientY});
+    mouseMove(event);
 
 }
+
+document.addEventListener('mouseup', mouseUp);
+
+function mouseUp(event) {
+    isMouseDown = false;
+}
+
+document.addEventListener('mousemove', mouseMove);
+
+function mouseMove(event) {
+    if (isMouseDown) {
+        var lastPoint = points[points.length - 1];
+        var currentPoint = { x: event.clientX, y: event.clientY };
+        if (Math.abs(currentPoint.x - lastPoint.x) > 10 ||  Math.abs(currentPoint.y - lastPoint.y) > 10) {
+            addPoint(currentPoint.x, currentPoint.y);
+            points.push(currentPoint);
+        }
+    }
+}
+
+
+
+/*
+    feladat: objektumok 9.1
+    filename: object9.js
+
+    target: creating points over mouse movement
+
+*/
