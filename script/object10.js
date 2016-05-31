@@ -63,32 +63,66 @@ var office = {
 }
 
 // 10/1.a
-console.log(Object.keys(office));
+    console.log(Object.keys(office));
+console.log('-----------------------------------------------------------------------------------');
+
+
 // 10/1.b
-console.log(office.coworkers);
+    console.log(office.coworkers.sort());
+console.log('-----------------------------------------------------------------------------------');
+
+
 // 10/1.c
-console.log('az egy főre jutó terület: ' + (office.area.value / office.coworkers.length) + 'sqm');
+    console.log('az egy főre jutó terület: ' + (office.area.value / office.coworkers.length) + 'sqm');
+console.log('-----------------------------------------------------------------------------------');
+
+
 // 10.1.d
-office.coworkers.splice(office.coworkers.indexOf('Doma'), 1);
-console.log(office.coworkers);
+    office.coworkers.splice(office.coworkers.indexOf('Doma'), 1);
+    console.log(office.coworkers);
+console.log('-----------------------------------------------------------------------------------');
+
+
 // 10/1.e
-var newcoworker = 'Pisti';
-office.coworkers.push(newcoworker);
+    var newcoworker = 'Pisti';
+    office.coworkers.push(newcoworker);
+console.log('-----------------------------------------------------------------------------------');
+
+
 // 10/1.f
-for (var szoveg in office) {
-    if (typeof(office[szoveg]) === 'string') {
-        console.log(office[szoveg]);
-    }
+    for (var szoveg in office) {
+        if (typeof office[szoveg] === 'string') {
+            console.log(office[szoveg]);
+        }
 }
 console.log('-----------------------------------------------------------------------------------');
-// 10/2.a
-console.log(office['address'].toString());
 
-var address = office.address;
-var letters = [];
-for (var i = 0; i < address.length; i += 1) {
-    if (!letters.includes(address[i])) {
-        letters.push(address[i]);
+
+// 10/2.a
+    var address = office.address;
+    var addressLetters = {};
+    for (var i = 0; i < address.length; i += 1) {
+        if (!addressLetters.hasOwnProperty(address[i])) {
+            addressLetters[address[i]] = 1;
+        }
+        else {
+            addressLetters[address[i]] +=1;
+        }
     }
-}
-console.log(letters);
+    console.log(addressLetters);
+console.log('-----------------------------------------------------------------------------------');
+
+
+// 10/2.b
+    var names = office.coworkers.join('');
+    var namesLetters = {};
+    console.log(names);
+    for (var i = 0; i < names.length; i += 1) {
+        if (!namesLetters.hasOwnProperty(names[i])) {
+            namesLetters[names[i]] = 1;
+        }
+        else {
+            namesLetters[names[i]] +=1;
+        }
+    }
+    console.log(namesLetters);
