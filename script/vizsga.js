@@ -54,50 +54,55 @@
  *
  */
 
-var movieDB =[
-            {title: 'The Matrix', year: 2001, actors: ['Keanu Reeves', 'Laurence Fishburne'], awards: [{name: 'Academy Awards',nominee: 4, won: 4}]},
-            {title: 'The Godfather', year: 1972, actors: ['Marlon Brando', 'Al Pacino'], awards: [{name: 'Academy Awards',nominee: 8, won: 4}]},
-            {title: 'Apocalypse Now', year: 1979, actors: ['Marlon Brando', 'Martin Sheen'], awards: [{name: 'Academy Awards',nominee: 6, won: 2}]},
-            {title: 'The Dark Knight', year: 2008, actors: ['Christian Bale', 'Heath Ledger'], awards: [{name: 'Academy Awards',nominee: 6, won: 2}]},
-            {title: 'Fight Club', year: 1999, actors: ['Brad Pitt', 'Edward Nolton'], awards: [{name: 'Academy Awards',nominee: 1, won: 0}]},
-            {title: '47 Ronin', year: 2013, actors: ['Keanu Reeves', 'Hiroyuki Sanada'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
-            {title: 'Mr. & Mrs. Smith', year: 2005, actors: ['Brad Pitt', 'Angelina Jolie'], awards: [{name: 'Academy Awards',nominee: 1, won: 0}]},
-            {title: 'American Psycho', year: 2000, actors: ['Christian Bale', 'Justin Theroux'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
-            {title: 'In Bruges', year: 2008, actors: ['Colin Farell', 'Brendan Gleeson'], awards: [{name: 'Academy Awards',nominee: 1, won: 0}]},
-            {title: 'By The Sea', year: 2015, actors: ['Brad Pitt', 'Angelina Jolie'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
-            {title: 'The Matrix Reloaded', year: 2003, actors: ['Keanu Reeves', 'Laurence Fishburne'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
-            {title: 'The Matrix Revolution', year: 2003, actors: ['Keanu Reeves', 'Laurence Fishburne'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
-            {title: 'A Mighty Heart', year: 2007, actors: ['Angelina Jolie', 'Brad Pitt'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]}
+ var movieDB =[
+             {title: 'The Matrix', year: 2001, actors: ['Keanu Reeves', 'Laurence Fishburne'], awards: [{name: 'Academy Awards',nominee: 4, won: 4}]},
+             {title: 'The Godfather', year: 1972, actors: ['Marlon Brando', 'Al Pacino'], awards: [{name: 'Academy Awards',nominee: 8, won: 4}]},
+             {title: 'Apocalypse Now', year: 1979, actors: ['Marlon Brando', 'Martin Sheen'], awards: [{name: 'Academy Awards',nominee: 6, won: 2}]},
+             {title: 'The Dark Knight', year: 2008, actors: ['Christian Bale', 'Heath Ledger'], awards: [{name: 'Academy Awards',nominee: 6, won: 2}]},
+             {title: 'Fight Club', year: 1999, actors: ['Brad Pitt', 'Edward Nolton'], awards: [{name: 'Academy Awards',nominee: 1, won: 0}]},
+             {title: '47 Ronin', year: 2013, actors: ['Keanu Reeves', 'Hiroyuki Sanada'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
+             {title: 'Mr. & Mrs. Smith', year: 2005, actors: ['Brad Pitt', 'Angelina Jolie'], awards: [{name: 'Academy Awards',nominee: 1, won: 0}]},
+             {title: 'American Psycho', year: 2000, actors: ['Christian Bale', 'Justin Theroux'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
+             {title: 'In Bruges', year: 2008, actors: ['Colin Farell', 'Brendan Gleeson'], awards: [{name: 'Academy Awards',nominee: 1, won: 0}]},
+             {title: 'By The Sea', year: 2015, actors: ['Brad Pitt', 'Angelina Jolie'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
+             {title: 'The Matrix Reloaded', year: 2003, actors: ['Keanu Reeves', 'Laurence Fishburne'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
+             {title: 'The Matrix Revolution', year: 2003, actors: ['Keanu Reeves', 'Laurence Fishburne'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
+             {title: 'A Mighty Heart', year: 2007, actors: ['Angelina Jolie', 'Brad Pitt'], awards: [{name: 'Academy Awards',nominee: 0, won: 0}]},
+             {title: 'The New', year: 2009, actors: ['Johnny Depp', 'Scarlett Johanson', 'Angelina Jolie', 'Brad Pitt'], awards: [{name: 'Academy Awards', nominee: 4, won: 3}]},
+             {title: 'Titanic', year: 1997, actors: ['Leonardo DiCaprio', 'Kate Winslet'], awards: [{name: 'Academy Awards', nominee: 14, won: 11}, {name: 'British Academy Film Awards', nominee: 10, won: 0}, {name: 'Golden Globe', nominee: 8, won: 4}]},
+             {title: 'Revolutionary Road', year: 2008, actors: ['Leonardo DiCaprio', 'Kate Winslet'], awards: [{name: 'Academy Awards', nominee: 3, won: 0}, {name: 'British Academy Film Awards', nominee: 4, won: 0}, {name: 'Golden Globe', nominee: 4, won: 1}]},
+             {title: 'The Departed', year: 2006, actors: ['Leonardo DiCaprio', 'Matt Damon', 'Jack Nicholson'], awards: [{name: 'Academy Awards', nominee: 5, won: 4}, {name: 'Golden Globe', nominee: 5, won: 1}]},
+             {title: 'As Good as It Gets', year: 1997, actors: ['Jack Nicholson', 'Helen Hunt'], awards: [{name: 'Academy Awards', nominee: 7, won: 2}, {name: 'Golden Globe', nominee: 7, won: 4}]},
+             {title: 'Heartburn', year: 1986, actors: ['Jack Nicholson', 'Meryl Streep'], awards: []},
+          ];
 
-         ];
 
-// 1. Listázd ki a színészeket, a nevük mellé írva, hogy hány filmben szerepeltek, e szerint csökkenő sorrendben (azaz legelőre azt, aki a legtöbb filmben).
 console.log('----------------------------------------------------------------------------------------------------------------------------------------------------------');
 console.log('1. Listázd ki a színészeket, a nevük mellé írva, hogy hány filmben szerepeltek, e szerint csökkenő sorrendben (azaz legelőre azt, aki a legtöbb filmben).');
 console.log('----------------------------------------------------------------------------------------------------------------------------------------------------------');
 
-var actorFilm = [];
+var actorMovies = [];
 for (var i = 0; i < movieDB.length; i += 1) {
     for (var n = 0; n < movieDB[i].actors.length; n += 1) {
-        if (actorFilm.length > 0) {
+        if (actorMovies.length > 0) {
             var newItem = true;
-            for (var a = 0; a < actorFilm.length; a += 1) {
-                if (actorFilm[a].name === (movieDB[i].actors[n])) {
-                    actorFilm[a].films += 1;
+            for (var a = 0; a < actorMovies.length; a += 1) {
+                if (actorMovies[a].name === (movieDB[i].actors[n])) {
+                    actorMovies[a].films += 1;
                     newItem = false;
                 }
             }
             if (newItem) {
-                actorFilm.push({name: movieDB[i].actors[n], films: 1});
+                actorMovies.push({name: movieDB[i].actors[n], films: 1});
             }
         }
         else {
-            actorFilm.push({name: movieDB[i].actors[n], films: 1});
+            actorMovies.push({name: movieDB[i].actors[n], films: 1});
         }
     }
 };
 // stolen from the MDN
-actorFilm.sort(function (a, b) {
+actorMovies.sort(function (a, b) {
   if (a.films < b.films) {
     return 1;
   }
@@ -107,45 +112,41 @@ actorFilm.sort(function (a, b) {
   // a must be equal to b
   return 0;
 });
-for (var i = 0; i < actorFilm.length; i += 1) {
-    console.log(actorFilm[i].name + ' - '+ actorFilm[i].films);
+for (var i = 0; i < actorMovies.length; i += 1) {
+    console.log(actorMovies[i].name + ' - '+ actorMovies[i].films);
 };
 
 
-// 2. Listázd ki azokat a színészpárokat, akik több, mint egy filmben szerepeltek közösen, és írd ki a közös filmjeik címét is.
+
 console.log('-----------------------------------------------------------------------------------------------------------------------');
 console.log('2. Listázd ki azokat a színészpárokat, akik több, mint egy filmben szerepeltek közösen, és írd ki a közös filmjeik címét is.');
 console.log('-----------------------------------------------------------------------------------------------------------------------');
 
 
 var actorList = [];
-for (var i = 0; i < movieDB.length; i += 1){
-    for (var n = 0; n < movieDB[i].actors.length; n += 1){
-        if (actorList.indexOf(movieDB[i].actors[n]) === -1) {
-            actorList.push(movieDB[i].actors[n]);
-        }
-    }
+for (var actorIndex = 0; actorIndex < actorMovies.length; actorIndex += 1) {
+    actorList.push(actorMovies[actorIndex].name)
 };
-var commonFilms = [];
-for (var i = 0; i < actorList.length; i += 1) {
-    for (var n = 0 + i; n < actorList.length; n +=1 ) {
-        var actor1 = actorList[i];
-        var actor2 = actorList[n];
-        if (i !== n) {
-            for (var index = 0; index < movieDB.length; index += 1) {
-                if (movieDB[index].actors.indexOf(actor1) !== -1 && movieDB[index].actors.indexOf(actor2) !== -1) {
-                    if (commonFilms.length > 0) {
-                        var length = commonFilms.length-1;
-                        if (commonFilms[length][0] === actor1 && commonFilms[length][1] === actor2) {
-                            commonFilms[length].push(movieDB[index].title);
-                        }
-                        else {
-                            commonFilms.push([actor1, actor2, movieDB[index].title]);
-                        }
+
+var commonMovies = [];
+for (var actorIndex = 0; actorIndex < actorList.length; actorIndex += 1) {
+    for (var actor2Index = actorIndex+1; actor2Index < actorList.length; actor2Index +=1 ) {
+        var actor1 = actorList[actorIndex];
+        var actor2 = actorList[actor2Index];
+
+        for (var movieDBIndex = 0; movieDBIndex < movieDB.length; movieDBIndex += 1) {
+            var currentMovie = movieDB[movieDBIndex];
+            if (currentMovie.actors.indexOf(actor1) !== -1 && currentMovie.actors.indexOf(actor2) !== -1) {
+                var pusHappened = false;
+
+                for (var commonIndex = 0; commonIndex < commonMovies.length; commonIndex += 1) {
+                    if (commonMovies[commonIndex].actorOne === actor1 && commonMovies[commonIndex].actorTwo === actor2) {
+                        commonMovies[commonIndex].movies.push(currentMovie.title);
+                        pusHappened = true;
                     }
-                    else {
-                        commonFilms.push([actor1, actor2, movieDB[index].title]);
-                    }
+                }
+                if (!pusHappened) {
+                    commonMovies.push({actorOne: actor1, actorTwo: actor2, movies: [currentMovie.title]});
                 }
             }
         }
@@ -153,36 +154,44 @@ for (var i = 0; i < actorList.length; i += 1) {
 };
 //idaig osszegyultek azok a szineszek akiknek van kozos filmjuk + a filmcim
 //azokra vagyunk kivancsiak akiknek tobb is van mint 1 :
-for (var i = 0; i < commonFilms.length; i += 1) {
-    if (commonFilms[i].length > 3) {
-        console.log(commonFilms[i].join(' '));
+for (var commonIndex = 0; commonIndex < commonMovies.length; commonIndex += 1) {
+    currentMovie = commonMovies[commonIndex];
+    if (currentMovie.movies.length > 1) {
+        console.log(currentMovie.actorOne + ' and ' + currentMovie.actorTwo + ' have these films in common: ' + currentMovie.movies.join(' and '));
     }
 };
 
 
-// 3. Listázd ki azokat a filmeket és készítésük évüket, amelyek Oscar-jelöléseik több mit felét meg is nyerték.
+
 console.log('-------------------------------------------------------------------------------------------------------------');
 console.log('3. Listázd ki azokat a filmeket és készítésük évüket, amelyek Oscar-jelöléseik több mit felét meg is nyerték.');
 console.log('-------------------------------------------------------------------------------------------------------------');
 
-for (var i = 0; i < movieDB.length; i += 1) {
-    var nom = movieDB[i].awards[0].nominee;
-    var won = movieDB[i].awards[0].won;
-    if (won/nom >= 0.5) {
-        console.log(movieDB[i].title + ' in ' + movieDB[i].year + ' : ' + movieDB[i].awards[0].won + '/' + movieDB[i].awards[0].niminee);
+for (var movieDBIndex = 0; movieDBIndex < movieDB.length; movieDBIndex += 1) {
+    var currentMovie = movieDB[movieDBIndex];
+
+    for (var awardIndex = 0; awardIndex < currentMovie.awards.length; awardIndex += 1) {
+        var currentAwards = currentMovie.awards[awardIndex];
+        if (currentAwards.name === 'Academy Awards') {
+            var oscarNom = currentAwards.nominee;
+            var oscarWon = currentAwards.won;
+            if (oscarWon/oscarNom > 0.5) {
+                console.log(movieDB[movieDBIndex].title + ' ' + movieDB[movieDBIndex].year);
+            }
+        }
     }
 };
 
 
-// 4. Írd ki annak a színésznek a nevét, akinek a legtöbb idő (legnagyobb szünet) telt el két filmje között (aki csak egy filmben szerepel, az nem számít).
+
 console.log('--------------------------------------------------------------------------------------------------------------------------------------------------------');
 console.log('4. Írd ki annak a színésznek a nevét, akinek a legtöbb idő (legnagyobb szünet) telt el két filmje között (aki csak egy filmben szerepel, az nem számít).');
 console.log('--------------------------------------------------------------------------------------------------------------------------------------------------------');
 
 var multiActor = [];
-for (var i = 0; i < actorFilm.length; i += 1) {
-    if (actorFilm[i].films > 1) {
-        multiActor.push(actorFilm[i].name);
+for (var i = 0; i < actorMovies.length; i += 1) {
+    if (actorMovies[i].films > 1) {
+        multiActor.push(actorMovies[i].name);
     }
 };
 var actorYears =[];
