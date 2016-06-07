@@ -82,52 +82,54 @@ console.log('1. Listázd ki a színészeket, a nevük mellé írva, hogy hány f
 console.log('----------------------------------------------------------------------------------------------------------------------------------------------------------');
 
 var actorMovies = [];
-for (var i = 0; i < movieDB.length; i += 1) {
-    for (var n = 0; n < movieDB[i].actors.length; n += 1) {
-        if (actorMovies.length > 0) {
-            var newItem = true;
-            for (var a = 0; a < actorMovies.length; a += 1) {
-                if (actorMovies[a].name === (movieDB[i].actors[n])) {
-                    actorMovies[a].films += 1;
-                    newItem = false;
-                }
-            }
-            if (newItem) {
-                actorMovies.push({name: movieDB[i].actors[n], films: 1});
+// actorMovies is a workarray which contains every data neceserry for the current task.
+// it is formed in every excercise.
+// for the first one, one needs the actors and the movie titles. for the last two tasks one needs the years too
+for (var movieDBIndex = 0; movieDBIndex < movieDB.length; movieDBIndex += 1) {
+    var currentMovie = movieDB[movieDBIndex];
+    for (var actorIndex = 0; actorIndex < currentMovie.actors.length; actorIndex += 1) {
+        var newItem = true;
+        for (var actorMoviesIndex = 0; actorMoviesIndex < actorMovies.length; actorMoviesIndex += 1) {
+            if (actorMovies[actorMoviesIndex].name === (currentMovie.actors[actorIndex])) {
+                actorMovies[actorMoviesIndex].titles.push(currentMovie.title);
+                actorMovies[actorMoviesIndex].years.push(currentMovie.year);
+                actorMovies[actorMoviesIndex].count += 1;
+                newItem = false;
             }
         }
-        else {
-            actorMovies.push({name: movieDB[i].actors[n], films: 1});
+        if (newItem) {
+            actorMovies.push({name: currentMovie.actors[actorIndex], titles: [currentMovie.title], years: [currentMovie.year], count: 1});
         }
     }
 };
 // stolen from the MDN
+// a sorting function
 actorMovies.sort(function (a, b) {
-  if (a.films < b.films) {
+  if (a.count < b.count) {
     return 1;
   }
-  if (a.films > b.films) {
+  if (a.count > b.count) {
     return -1;
   }
   // a must be equal to b
   return 0;
 });
 for (var i = 0; i < actorMovies.length; i += 1) {
-    console.log(actorMovies[i].name + ' - '+ actorMovies[i].films);
+    console.log(actorMovies[i].name + ' - '+ actorMovies[i].count);
 };
-
 
 
 console.log('-----------------------------------------------------------------------------------------------------------------------');
 console.log('2. Listázd ki azokat a színészpárokat, akik több, mint egy filmben szerepeltek közösen, és írd ki a közös filmjeik címét is.');
 console.log('-----------------------------------------------------------------------------------------------------------------------');
 
-
+// actorList is an auxillary array that contains only the actors names
+// it could be easily list from the movieDB and the actorMovies arrays too but this auxillary array makes it much more easy.
 var actorList = [];
 for (var actorIndex = 0; actorIndex < actorMovies.length; actorIndex += 1) {
     actorList.push(actorMovies[actorIndex].name)
 };
-
+// commonMovies is an array that contains every actor pair who has common movies.
 var commonMovies = [];
 for (var actorIndex = 0; actorIndex < actorList.length; actorIndex += 1) {
     for (var actor2Index = actorIndex+1; actor2Index < actorList.length; actor2Index +=1 ) {
@@ -153,14 +155,15 @@ for (var actorIndex = 0; actorIndex < actorList.length; actorIndex += 1) {
     }
 };
 //idaig osszegyultek azok a szineszek akiknek van kozos filmjuk + a filmcim
+// until now we have every pair of actor who has a common movie
 //azokra vagyunk kivancsiak akiknek tobb is van mint 1 :
+//  but for task 2 we only need that ones who have more than one common movies:
 for (var commonIndex = 0; commonIndex < commonMovies.length; commonIndex += 1) {
     currentMovie = commonMovies[commonIndex];
     if (currentMovie.movies.length > 1) {
-        console.log(currentMovie.actorOne + ' and ' + currentMovie.actorTwo + ' have these films in common: ' + currentMovie.movies.join(' and '));
+        console.log(currentMovie.actorOne + ' and ' + currentMovie.actorTwo + ' have these movies in common: ' + currentMovie.movies.join(' and '));
     }
 };
-
 
 
 console.log('-------------------------------------------------------------------------------------------------------------');
@@ -188,56 +191,99 @@ console.log('-------------------------------------------------------------------
 console.log('4. Írd ki annak a színésznek a nevét, akinek a legtöbb idő (legnagyobb szünet) telt el két filmje között (aki csak egy filmben szerepel, az nem számít).');
 console.log('--------------------------------------------------------------------------------------------------------------------------------------------------------');
 
-var multiActor = [];
-for (var i = 0; i < actorMovies.length; i += 1) {
-    if (actorMovies[i].films > 1) {
-        multiActor.push(actorMovies[i].name);
+
+
+for (var actorMoviesIndex = 0; actorMoviesIndex < actorMovies.length; actorMoviesIndex += 1) {
+    var currentActor = actorMovies[actorMoviesIndex];
+    if (currentActor.titles.length > 1) {
+        currentActor.years.sort();
+        currentActor.hiatus = [];
+        for (var yearsIndex = 0; yearsIndex < currentActor.years.length - 1; yearsIndex += 1) {
+            currentActor.hiatus.push(currentActor.years[yearsIndex + 1] - currentActor.years[yearsIndex]);
+        }
     }
 };
-var actorYears =[];
-for (var i = 0; i < multiActor.length; i += 1) {
-    for (var n = 0; n < movieDB.length; n += 1){
-        if (movieDB[n].actors.indexOf(multiActor[i]) !== -1) {
-            if (actorYears.length > 0) {
-                var newItem = true;
-                for (var a = 0; a < actorYears.length; a += 1) {
-                    if (actorYears[a].indexOf(multiActor[i]) !== -1) {
-                        actorYears[a].push(movieDB[n].year);
-                        newItem = false;
-                    }
-                }
-                if (newItem) {
-                    actorYears.push([multiActor[i], movieDB[n].year]);
-                }
+var maxHiatus = {name: [], hiatus: 0};
+for (var actorMoviesIndex = 0; actorMoviesIndex < actorMovies.length; actorMoviesIndex += 1) {
+    currentActor = actorMovies[actorMoviesIndex];
+    if (currentActor.count > 1) {
+        for (var hiatusIndex = 0; hiatusIndex < currentActor.hiatus.length; hiatusIndex += 1) {
+            if (currentActor.hiatus[hiatusIndex] === maxHiatus.hiatus && currentActor.name !== maxHiatus.name[maxHiatus.name.length -1]) {
+                maxHiatus.name.push(currentActor.name);
             }
-            else {
-                actorYears.push([multiActor[i], movieDB[n].year]);
+            if (currentActor.hiatus[hiatusIndex] > maxHiatus.hiatus) {
+                maxHiatus.hiatus = currentActor.hiatus[hiatusIndex];
+                maxHiatus.name = [currentActor.name];
             }
         }
     }
 };
-var min = [];
-var max = [];
-for (var i = 0; i < actorYears.length; i += 1) {
-    min[i] = actorYears[i][1];
-    max[i] = actorYears[i][1];
-    for (var n = 1; n < actorYears[i].length; n += 1) {
-        if (actorYears[i][n] < min[i]) {
-            min[i] = actorYears[i][n];
-        }
-        if (actorYears[i][n] > max[i]) {
-            max[i] = actorYears[i][n];
+
+console.log(maxHiatus.name.join(' , ') + ' : ' + maxHiatus.hiatus + ' years');
+
+console.log('--------------------------------------------------------------------------------------------------------------------------------------------------------');
+console.log('5. Írd ki az összes lehetséges színész párost a movieDB színészeiből');
+console.log('--------------------------------------------------------------------------------------------------------------------------------------------------------');
+var randomPair = [];
+
+for (var actorIndex = 0; actorIndex < actorList.length - 1; actorIndex += 1) {
+    for (var actor2Index = actorIndex + 1; actor2Index < actorList.length; actor2Index += 1) {
+        randomPair.push([actorList[actorIndex], actorList[actor2Index]]);
+    }
+}
+
+console.log(randomPair);
+
+
+
+console.log('--------------------------------------------------------------------------------------------------------------------------------------------------------');
+console.log('6. Írd ki az összes lehetséges színész triót a movieDB színészeiből');
+console.log('--------------------------------------------------------------------------------------------------------------------------------------------------------');
+
+var randomTrio = [];
+
+for (var actorIndex = 0; actorIndex < actorList.length - 2; actorIndex += 1) {
+    for (var actor2Index = actorIndex + 1; actor2Index < actorList.length - 1; actor2Index += 1) {
+        for (var actor3Index = actor2Index + 1; actor3Index < actorList.length; actor3Index += 1) {
+            var actor1 = actorList[actorIndex];
+            var actor2 = actorList[actor2Index];
+            var actor3 = actorList[actor3Index];
+            randomTrio.push([actor1, actor2, actor3]);
         }
     }
 };
-var diffYear = [];
-for (var i = 0; i < min.length; i += 1) {
-    diffYear[i] = max[i] - min[i];
-};
-var maxDiff = diffYear[0];
-for (var i = 0; i < diffYear.length; i += 1) {
-    if (diffYear[i] > maxDiff) {
-        maxDiff = diffYear[i];
+
+console.log(randomTrio);
+
+
+console.log('--------------------------------------------------------------------------------------------------------------------------------------------------------');
+console.log('7. gyujtsd ki a szokasos filmadatbazisbol a dijakat, es mellejuk, hogy milyen filmek nyertek azokat el. kb ugyanugy, mint amikor a szineszeket es a filmjeiket gyujtottuk ki.');
+console.log('7.bonusz: rendezd is dijankent csokkeno sorrendbe a filmeket (amelyik a legtobbet nyert abbol, az elol');
+console.log('--------------------------------------------------------------------------------------------------------------------------------------------------------');
+
+var awardsList = [];
+
+for (var movieDBIndex = 0; movieDBIndex < movieDB.length; movieDBIndex += 1) {
+    var currentMovie = movieDB[movieDBIndex];
+    for (var awardIndex = 0; awardIndex < currentMovie.awards.length; awardIndex += 1) {
+        var currentAward = currentMovie.awards[awardIndex];
+        var newItem = true;
+
+        for (var awardsListIndex = 0; awardsListIndex < awardsList.length; awardsListIndex += 1) {
+
+            if (awardsList[awardsListIndex].name === currentAward.name) {
+                awardsList[awardIndex].movies.push(currentMovie.title);
+                newItem = false;
+            }
+        }
+        if (newItem) {
+            awardsList.push({name: currentAward.name, movies: [currentMovie.title]});
+        }
     }
 };
-console.log(actorYears[diffYear.indexOf(maxDiff)][0] + ' has ' + maxDiff + ' years');
+console.log(awardsList);
+
+awardsList.sort(function (a, b) {
+
+    if ()
+})

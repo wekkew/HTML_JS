@@ -79,13 +79,81 @@ function letterCombinations(input) {
     else {
         input = String(input);
         var result = [];
-        for (var i = 0; i < input.length; i += 1) {
-            result.push([input[i]]);
-            for (var n = i; n < input.length; n +=1) {
-                result[i].push(input[n]);
+        for (var stringIndex1 = 0; stringIndex1 < input.length+1; stringIndex1 += 1) {
+            for (var stringIndex2 = stringIndex1 + 1; stringIndex2 < input.length+1; stringIndex2 += 1) {
+                result.push(input.substring(stringIndex1, stringIndex2));
             }
         }
-        return result;
     }
+
+    return result;
+};
+console.log(letterCombinations('alfaromeo').sort().join(', '));
+
+
+function letterAlphabeticalOrdered(input) {
+    if (typeof input === 'object' && !Array.isArray(input)) {
+        return 'Error: input type should not be Object.'
+    }
+    else {
+        input = String(input);
+        result = [];
+        for (var stringIndex = 0; stringIndex < input.length; stringIndex += 1) {
+            result.push(input[stringIndex]);
+        }
+        result.sort();
+    }
+
+    return result.join('');
+};
+console.log(letterAlphabeticalOrdered('alma'));
+
+
+var input = 'lorem ipsum dolor sunt';
+
+var indexOf = [0];
+var newIndex;
+while (newIndex !== input.lastIndexOf(' ')) {
+    newIndex = input.indexOf(' ', newIndex+1);
+    indexOf.push(input.indexOf(' ', newIndex)+1);
 }
-console.log(letterCombinations(szoveg));
+
+console.log(indexOf);
+var result = [];
+for (var stringIndex = 0; stringIndex < input.length; stringIndex += 1) {
+    result.push(input[stringIndex]);
+
+}
+for (var indexOfIndex = 0; indexOfIndex < indexOf.length; indexOfIndex += 1){
+    result[indexOf[indexOfIndex]] = result[indexOf[indexOfIndex]].toUpperCase();
+}
+console.log(result.join(''));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/
