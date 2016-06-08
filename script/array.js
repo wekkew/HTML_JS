@@ -33,3 +33,14 @@ console.log(outerArray.length);
 console.log(outerArray[0].length);
 
 console.log(sum);
+
+
+var arr = [2, 13, 21, 54, 32, 15, 84, 3];
+
+var arr1 = [{age: 12}, {age: -54}, {age: 35}, {age: 78}, {age: 152}, {age: 1}, {age: 354}];
+
+var arr2 =[
+    {owners: [{age: 12}, {age: -54}, {age: 35}, {age: 78}, {age: 152}, {age: 1}, {age: 354}]},
+    {owners: [{age: 12}, {age: -54}, {age: 35}, {age: 78}, {age: 152}, {age: 1}, {age: 354}]},
+    {owners: [{age: 12}, {age: -54}, {age: 35}, {age: 78}, {age: 152}, {age: 1}, {age: 354}]}
+        ];
